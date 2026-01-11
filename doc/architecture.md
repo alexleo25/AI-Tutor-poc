@@ -71,14 +71,17 @@ It represents the current frontend-first approach and planned backend and AI int
 
 
 User (Browser)
-      |
-      v
+      --
+      >
+      
 Frontend (HTML / UI)
-      |
-      v
+      --
+      >
+      
 Backend API (Planned)
-      |
-      v
+      --
+      >
+      
 AI Service (Planned)
 
 
