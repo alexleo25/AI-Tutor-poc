@@ -1,8 +1,8 @@
-\# AI Tutor POC
+# AI Tutor POC
 
 
 
-\## Project Overview
+## Project Overview
 
 This repository contains a Proof of Concept (POC) for an AI Tutor platform.
 
@@ -18,29 +18,13 @@ This is a learning and experimentation project.
 
 
 
-\## Project Structure
+## Project Structure
 
-\- \*\*frontend/\*\* – All user interface (UI) related work
+- **frontend** – All user interface (UI) related work
 
-\- \*\*backend/\*\* – Placeholder for backend services (to be implemented later)
+- **backend** – Placeholder for backend services (to be implemented later)
 
-\- \*\*docs/\*\* – Architecture notes and design understanding
-
-
-
----
-
-
-
-\## Team Responsibilities
-
-\- \*\*Alex\*\* – Project setup, repository structure, workflow, and documentation
-
-\- \*\*Uzair\*\* – Authentication UI (Sign In / Sign Up)
-
-\- \*\*Mulali\*\* – Tutor and Student listing UI
-
-\- \*\*Praveen\*\* – Free Beginner Courses listing UI
+- **docs** – Architecture notes and design understanding
 
 
 
@@ -48,15 +32,31 @@ This is a learning and experimentation project.
 
 
 
-\## Team Workflow
+## Team Responsibilities
 
-1\. Clone the repository to your local system  
+- **Alex** – Project setup, repository structure, workflow, and documentation
 
-2\. Work only inside your assigned folder  
+- **Uzair** – Authentication UI (Sign In / Sign Up)
 
-3\. Create UI files (HTML/CSS/JS) as needed  
+- **Mulali** – Tutor and Student listing UI
 
-4\. Commit and push your changes regularly  
+- **Praveen** – Free Beginner Courses listing UI
+
+
+
+---
+
+
+
+## Team Workflow
+
+1. Clone the repository to your local system  
+
+2. Work only inside your assigned folder  
+
+3. Create UI files (HTML/CSS/JS) as needed  
+
+4. Commit and push your changes regularly  
 
 
 
@@ -68,15 +68,15 @@ Do not modify folders assigned to other team members.
 
 
 
-\## Current Status
+## Current Status
 
-\- Project structure created
+- Project structure created
 
-\- Initial frontend landing page added
+- Initial frontend landing page added
 
-\- Documentation and workflow finalized
+- Documentation and workflow finalized
 
-\- Ready for parallel development by team members
+- Ready for parallel development by team members
 
 
 
