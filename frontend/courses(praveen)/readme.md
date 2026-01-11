@@ -1,4 +1,4 @@
-\# Free Beginner Courses
+# Free Beginner Courses
 
 
 
@@ -8,21 +8,21 @@ This folder is responsible for displaying free beginner-level courses.
 
 Scope of work:
 
-\- Course listing page
+- Course listing page
 
-\- Course details (optional)
+- Course details (optional)
 
-\- Beginner-level, free courses only
+- Beginner-level, free courses only
 
 
 
 Notes:
 
-\- Static or dummy course data is acceptable
+- Static or dummy course data is acceptable
 
-\- No payment or enrollment logic is required
+- No payment or enrollment logic is required
 
-\- Focus on clean presentation and structure
+- Focus on clean presentation and structure
 
 
 
