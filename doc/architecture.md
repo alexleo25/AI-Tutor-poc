@@ -1,8 +1,8 @@
-\# AI Tutor POC – Architecture
+# AI Tutor POC – Architecture
 
 
 
-\## Overview
+## Overview
 
 The AI Tutor POC is designed as a simple, modular system to explore how an AI-driven learning platform could work.
 
@@ -16,29 +16,13 @@ The focus is on understanding flow and structure rather than full implementation
 
 
 
-\## High-Level Components
+## High-Level Components
 
-\- \*\*Frontend\*\* – User interface for students and tutors
+- **Frontend** – User interface for students and tutors
 
-\- \*\*Backend\*\* – API layer for business logic (planned)
+- **Backend** – API layer for business logic (planned)
 
-\- \*\*AI Service\*\* – Generates learning content and feedback (planned)
-
-
-
----
-
-
-
-\## Basic Flow
-
-1\. User interacts with the frontend UI
-
-2\. Frontend sends requests to backend APIs (future)
-
-3\. Backend communicates with AI services (future)
-
-4\. Responses are displayed back to the user
+- **AI Service** – Generates learning content and feedback (planned)
 
 
 
@@ -46,11 +30,27 @@ The focus is on understanding flow and structure rather than full implementation
 
 
 
-\## Current Phase
+## Basic Flow
 
-\- Frontend UI development using static/dummy data
+1. User interacts with the frontend UI
 
-\- Backend and AI components are planned for later phases
+2. Frontend sends requests to backend APIs (future)
+
+3. Backend communicates with AI services (future)
+
+4. Responses are displayed back to the user
+
+
+
+---
+
+
+
+## Current Phase
+
+- Frontend UI development using static/dummy data
+
+- Backend and AI components are planned for later phases
 
 
 
@@ -58,7 +58,7 @@ The focus is on understanding flow and structure rather than full implementation
 
 
 
-\## Architecture Flow Diagram
+## Architecture Flow Diagram
 
 
 
@@ -70,25 +70,17 @@ It represents the current frontend-first approach and planned backend and AI int
 
 
 
-
-
 User (Browser)
-
-&nbsp;     |
-
-&nbsp;     v
+     |
+     v
 
 Frontend (HTML / UI)
-
-&nbsp;     |
-
-&nbsp;     v
+     |
+     v
 
 Backend API (Planned)
-
-&nbsp;     |
-
-&nbsp;     v
+     |
+     v
 
 AI Service (Planned)
 
