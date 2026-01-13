@@ -1,0 +1,85 @@
+import React, { useState } from 'react';
+
+// Sample Data
+const INITIAL_ITEMS = [
+  { id: 1, name: 'Premium Wireless Headphones', category: 'Electronics', price: '$299' },
+  { id: 2, name: 'Ergonomic Office Chair', category: 'Furniture', price: '$150' },
+  { id: 3, name: 'Mechanical Keyboard', category: 'Electronics', price: '$120' },
+  { id: 4, name: 'Hydro Flask Water Bottle', category: 'Lifestyle', price: '$45' },
+  { id: 5, name: 'Standing Desk', category: 'Furniture', price: '$450' },
+];
+
+const ListingApp = () => {
+  const [items, setItems] = useState(INITIAL_ITEMS);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [activeCategory, setActiveCategory] = useState('All');
+
+  const categories = ['All', 'Electronics', 'Furniture', 'Lifestyle'];
+
+  // Logic: Filter items based on Search Term AND Category
+  const filteredItems = items.filter((item) => {
+    const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = activeCategory === 'All' || item.category === activeCategory;
+    return matchesSearch && matchesCategory;
+  });
+
+  return (
+    <div className="min-h-screen bg-gray-50 p-8 font-sans">
+      <div className="max-w-4xl mx-auto">
+        <header className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900">Product Inventory</h1>
+          <p className="text-gray-600">Manage and browse your items effortlessly.</p>
+        </header>
+
+        {/* Search and Filters */}
+        <div className="flex flex-col md:flex-row gap-4 mb-8">
+          <input
+            type="text"
+            placeholder="Search products..."
+            className="flex-grow p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <div className="flex gap-2 overflow-x-auto">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                  activeCategory === cat 
+                  ? 'bg-blue-600 text-white' 
+                  : 'bg-white text-gray-600 border border-gray-300 hover:bg-gray-100'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* The Listing Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredItems.length > 0 ? (
+            filteredItems.map((item) => (
+              <div key={item.id} className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                <span className="text-xs font-semibold uppercase tracking-wider text-blue-500">
+                  {item.category}
+                </span>
+                <h3 className="text-lg font-bold text-gray-800 mt-2">{item.name}</h3>
+                <p className="text-gray-900 font-semibold mt-4 text-xl">{item.price}</p>
+                <button className="w-full mt-4 bg-gray-900 text-white py-2 rounded-lg hover:bg-gray-800 transition-colors">
+                  View Details
+                </button>
+              </div>
+            ))
+          ) : (
+            <div className="col-span-full text-center py-12">
+              <p className="text-gray-500 text-lg">No products found matching your criteria.</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ListingApp;
