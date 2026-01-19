@@ -6,29 +6,25 @@
     <title>AI Tutor - Courses</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; }
-        
         .navbar { background: #1a73e8; color: white; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; border-radius: 8px; margin-bottom: 30px; }
-        
         .search-container { text-align: center; margin-bottom: 40px; }
         .search-bar { width: 50%; padding: 12px; border-radius: 25px; border: 1px solid #ddd; font-size: 1rem; outline: none; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-
         .course-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; }
-
         .course-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 12px rgba(0,0,0,0.1); transition: 0.3s; }
         .course-card:hover { transform: scale(1.02); }
-        
-        /* Colored placeholders for images */
         .img-python { background: #3776ab; height: 160px; color: white; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
         .img-web { background: #e34f26; height: 160px; color: white; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
         .img-ai { background: #6f42c1; height: 160px; color: white; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
-
         .course-content { padding: 20px; }
         .tag { background: #e8f0fe; color: #1a73e8; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
         .course-title { font-size: 1.3rem; margin: 10px 0; color: #202124; }
         .course-desc { color: #5f6368; line-height: 1.5; margin-bottom: 20px; }
+        .btn { display: block; text-align: center; padding: 12px; background: #1a73e8; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; border:none; width:100%; cursor:pointer; }
         
-        .btn { display: block; text-align: center; padding: 12px; background: #1a73e8; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; }
-        .btn:hover { background: #1557b0; }
+        /* Modal Styles */
+        .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
+        .modal-content { background: white; margin: 10% auto; padding: 30px; border-radius: 15px; width: 40%; position: relative; }
+        .close-btn { position: absolute; top: 10px; right: 20px; font-size: 2rem; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -39,56 +35,82 @@
     </div>
 
     <div class="search-container">
-        <input type="text" class="search-bar" placeholder="What do you want to learn today?">
+        <input type="text" id="searchInput" class="search-bar" placeholder="What do you want to learn today?">
     </div>
 
     <div class="course-container">
+        <!-- Python -->
         <div class="course-card">
             <div class="img-python">Python</div>
             <div class="course-content">
                 <span class="tag">Programming</span>
                 <div class="course-title">Python for Data Science</div>
-                <p class="course-desc">Master Python basics and move into data analysis with AI assistance.</p>
-                <a href="#" class="btn">Enroll Now</a>
+                <p class="course-desc">Master Python basics and move into data analysis.</p>
+                <button class="btn enroll-btn">Enroll Now</button>
             </div>
         </div>
 
+        <!-- Web Dev -->
         <div class="course-card">
             <div class="img-web">HTML/CSS</div>
             <div class="course-content">
                 <span class="tag">Web Dev</span>
                 <div class="course-title">Frontend Foundations</div>
-                <p class="course-desc">Learn how to build modern, responsive websites from scratch.</p>
-                <a href="#" class="btn">Enroll Now</a>
+                <p class="course-desc">Learn how to build modern, responsive websites.</p>
+                <button class="btn enroll-btn">Enroll Now</button>
             </div>
         </div>
 
+        <!-- AI -->
         <div class="course-card">
             <div class="img-ai">AI</div>
             <div class="course-content">
                 <span class="tag">Modern Tech</span>
                 <div class="course-title">Generative AI Intro</div>
-                <p class="course-desc">Explore how ChatGPT and LLMs work in this beginner-friendly course.</p>
-                <a href="#" class="btn">Enroll Now</a>
+                <p class="course-desc">Explore how ChatGPT and LLMs work.</p>
+                <button class="btn enroll-btn">Enroll Now</button>
             </div>
         </div>
     </div>
-<script>
-    const searchBar = document.querySelector('.search-bar');
-    const cards = document.querySelectorAll('.course-card');
 
-    searchBar.addEventListener('keyup', (e) => {
-        const term = e.target.value.toLowerCase();
-        
-        cards.forEach(card => {
-            const title = card.querySelector('.course-title').textContent.toLowerCase();
-            if(title.includes(term)) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
+    <!-- Popup Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="modalTitle">Course Title</h2>
+            <p>Ready to start your journey with the AI Tutor?</p>
+            <a href="lesson.html" class="btn">Start Learning Now</a>
+        </div>
+    </div>
+
+    <script>
+        // --- SEARCH LOGIC ---
+        const searchInput = document.getElementById('searchInput');
+        const cards = document.querySelectorAll('.course-card');
+
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            cards.forEach(card => {
+                const title = card.querySelector('.course-title').innerText.toLowerCase();
+                card.style.display = title.includes(term) ? 'block' : 'none';
+            });
+        });
+
+        // --- POPUP LOGIC ---
+        const modal = document.getElementById("myModal");
+        const closeBtn = document.querySelector(".close-btn");
+
+        document.querySelectorAll('.enroll-btn').forEach(btn => {
+            btn.onclick = (e) => {
+                const card = e.target.closest('.course-card');
+                const title = card.querySelector('.course-title').innerText;
+                document.getElementById('modalTitle').innerText = title;
+                modal.style.display = "block";
             }
         });
-    });
-</script>
+
+        closeBtn.onclick = () => modal.style.display = "none";
+        window.onclick = (event) => { if (event.target == modal) modal.style.display = "none"; }
+    </script>
 </body>
 </html>
