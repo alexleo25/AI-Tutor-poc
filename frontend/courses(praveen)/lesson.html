@@ -4,32 +4,122 @@
     <meta charset="UTF-8">
     <title>AI Tutor - Lesson</title>
     <style>
-        body { font-family: sans-serif; margin: 0; display: flex; height: 100vh; }
-        .lesson-area { flex: 2; padding: 40px; background: #fff; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; height: 100vh; overflow: hidden; }
+        
+        /* Left Side: Lesson & Playground */
+        .lesson-area { flex: 2; padding: 40px; background: #fff; overflow-y: auto; }
+        .video-box { width: 100%; height: 300px; background: #000; color: white; display: flex; align-items: center; justify-content: center; border-radius: 10px; }
+        
+        /* Quiz Styling */
+        .quiz-section { margin-top: 40px; padding: 20px; background: #f9f9f9; border: 1px solid #ddd; border-radius: 10px; }
+        .quiz-opt { width: 100%; padding: 12px; text-align: left; border: 1px solid #ddd; background: #fff; border-radius: 5px; cursor: pointer; margin-bottom: 10px; transition: 0.2s; }
+        .quiz-opt:hover { background: #e8f0fe; }
+        .correct { background: #d4edda !important; border-color: #28a745 !important; color: #155724; }
+        .wrong { background: #f8d7da !important; border-color: #dc3545 !important; color: #721c24; }
+
+        /* Playground Styling */
+        .playground { margin-top: 40px; padding: 20px; background: #2d2d2d; color: #fff; border-radius: 10px; font-family: monospace; }
+        textarea { width: 100%; height: 80px; background: #1e1e1e; color: #dcdcdc; border: 1px solid #444; padding: 10px; border-radius: 5px; margin-top: 10px; outline: none; resize: none; }
+        .run-btn { background: #48bb78; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 10px; font-weight: bold; }
+
+        /* Right Side: AI Sidebar */
         .ai-sidebar { flex: 1; background: #f8f9fa; border-left: 2px solid #ddd; display: flex; flex-direction: column; }
-        .chat-box { flex: 1; padding: 20px; overflow-y: auto; }
-        .input-area { padding: 20px; border-top: 1px solid #ddd; display: flex; }
-        input { flex: 1; padding: 10px; border-radius: 5px; border: 1px solid #ddd; }
-        .msg { margin-bottom: 10px; padding: 10px; border-radius: 8px; }
-        .bot { background: #e8f0fe; align-self: flex-start; }
+        .chat-box { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+        .msg { padding: 10px; border-radius: 8px; max-width: 85%; font-size: 0.9rem; }
+        .bot { background: #e8f0fe; align-self: flex-start; color: #1a73e8; }
+        .user { background: #dcf8c6; align-self: flex-end; }
+        .input-area { padding: 20px; border-top: 1px solid #ddd; display: flex; gap: 5px; }
     </style>
 </head>
 <body>
+
     <div class="lesson-area">
-        <a href="index.html">← Back</a>
-        <h1>Lesson: Intro to Python</h1>
-        <div style="width: 100%; height: 300px; background: #000; color: white; display: flex; align-items: center; justify-content: center;">
-            [Video Lesson Content]
+        <a href="dashboard.html" style="text-decoration: none; color: #1a73e8; font-weight: bold;">← Back to Dashboard</a>
+        <h1>Lesson 1: Intro to Python Variables</h1>
+        
+        <div class="video-box">[Video Content: Variables & Types]</div>
+
+        <!-- Quiz Section -->
+        <div class="quiz-section">
+            <h3>Quick Quiz</h3>
+            <p>What is the correct way to assign 5 to <b>x</b>?</p>
+            <button class="quiz-opt" onclick="checkAnswer(false, this)">int x = 5</button>
+            <button class="quiz-opt" onclick="checkAnswer(true, this)">x = 5</button>
+            <button class="quiz-opt" onclick="checkAnswer(false, this)">variable x = 5</button>
+            <p id="quiz-feedback" style="font-weight: bold; margin-top: 10px;"></p>
+        </div>
+
+        <!-- Coding Playground -->
+        <div class="playground">
+            <h3 style="color: #4dc9ff; margin-top: 0;">💻 AI Coding Playground</h3>
+            <p>Task: Assign your name to a variable called <b>my_name</b></p>
+            <textarea id="codeEditor" placeholder="# Type code here..."></textarea>
+            <button class="run-btn" onclick="runCode()">Run & Check with AI</button>
+            <div id="codeOutput" style="margin-top: 10px; color: #48bb78; font-weight: bold;"></div>
         </div>
     </div>
+
+    <!-- AI Sidebar -->
     <div class="ai-sidebar">
-        <div style="padding: 20px; background: #1a73e8; color: white;">🤖 AI Tutor</div>
+        <div style="padding: 20px; background: #1a73e8; color: white; font-weight: bold;">🤖 AI Tutor</div>
         <div class="chat-box" id="chat">
-            <div class="msg bot">Hi! I'm your AI Tutor. Stuck on something? Ask me anything!</div>
+            <div class="msg bot">Hi Praveen! I'm watching your progress. Try the quiz or write some code!</div>
         </div>
         <div class="input-area">
-            <input type="text" placeholder="Ask AI..." onkeypress="if(event.key === 'Enter') alert('AI response is not connected yet, but look how good this UI looks!')">
+            <input type="text" id="userMsg" placeholder="Ask AI..." style="flex:1; padding:10px; border-radius:5px; border:1px solid #ddd;">
+            <button onclick="sendManualMsg()" style="padding:10px; background:#1a73e8; color:white; border:none; border-radius:5px; cursor:pointer;">Send</button>
         </div>
     </div>
+
+    <script>
+        const chatBox = document.getElementById('chat');
+
+        function addBotMessage(text) {
+            const msg = document.createElement('div');
+            msg.className = 'msg bot';
+            msg.innerText = text;
+            chatBox.appendChild(msg);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function checkAnswer(isCorrect, element) {
+            const feedback = document.getElementById('quiz-feedback');
+            if (isCorrect) {
+                element.className = "quiz-opt correct";
+                feedback.innerText = "Correct! Python is easy!";
+                feedback.style.color = "#28a745";
+                addBotMessage("Excellent work on the quiz! Ready for the coding task?");
+            } else {
+                element.className = "quiz-opt wrong";
+                feedback.innerText = "Try again! No keywords needed.";
+                feedback.style.color = "#dc3545";
+                addBotMessage("Don't worry, remember: in Python, you just write 'x = 5'.");
+            }
+        }
+
+        function runCode() {
+            const code = document.getElementById('codeEditor').value;
+            const output = document.getElementById('codeOutput');
+            if (code.includes("my_name =") || code.includes("my_name=")) {
+                output.innerText = ">>> AI Tutor: Perfect syntax! Variable assigned.";
+                output.style.color = "#48bb78";
+                addBotMessage("I saw your code! You're a natural at Python.");
+            } else {
+                output.innerText = ">>> AI Tutor: Check your variable name.";
+                output.style.color = "#f56565";
+            }
+        }
+
+        function sendManualMsg() {
+            const input = document.getElementById('userMsg');
+            if(input.value.trim() === "") return;
+            const msg = document.createElement('div');
+            msg.className = 'msg user';
+            msg.innerText = input.value;
+            chatBox.appendChild(msg);
+            input.value = "";
+            setTimeout(() => addBotMessage("I'm analyzing your question... Great point! In Python, variables are like boxes..."), 1000);
+        }
+    </script>
 </body>
 </html>
