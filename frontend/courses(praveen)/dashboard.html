@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tutor - Dashboard</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; margin: 0; display: flex; height: 100vh; }
+        
+        /* Sidebar */
+        .sidebar { width: 250px; background: #1a73e8; color: white; padding: 30px 20px; display: flex; flex-direction: column; gap: 20px; }
+        .sidebar h2 { margin-bottom: 30px; font-size: 1.5rem; }
+        .nav-item { color: white; text-decoration: none; padding: 10px; border-radius: 5px; transition: 0.2s; }
+        .nav-item:hover { background: rgba(255,255,255,0.1); }
+        .active { background: rgba(255,255,255,0.2); font-weight: bold; }
+
+        /* Main Content */
+        .main-content { flex: 1; padding: 40px; overflow-y: auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        
+        /* Stats Cards */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .card h3 { margin-top: 0; color: #5f6368; font-size: 1rem; }
+        
+        /* Progress Bar */
+        .progress-container { background: #e0e0e0; border-radius: 10px; height: 12px; margin: 15px 0; overflow: hidden; }
+        .progress-bar { background: #28a745; width: 65%; height: 100%; border-radius: 10px; }
+
+        /* AI Tip Box */
+        .ai-tip { background: #e8f0fe; padding: 20px; border-radius: 12px; border-left: 5px solid #1a73e8; margin-top: 30px; display: flex; align-items: center; gap: 15px; }
+        .ai-tip i { font-size: 2rem; }
+
+        .btn-resume { display: inline-block; background: #1a73e8; color: white; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 10px; }
+        .btn-resume:hover { background: #1557b0; }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>🤖 AI Tutor</h2>
+        <a href="#" class="nav-item active">🏠 Dashboard</a>
+        <a href="index.html" class="nav-item">📚 Course Catalog</a>
+        <a href="#" class="nav-item">📈 My Progress</a>
+        <a href="#" class="nav-item">⚙️ Settings</a>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h1>Welcome back, Praveen! 👋</h1>
+            <div style="color: #5f6368;">Monday, 19 Jan 2026</div>
+        </div>
+
+        <div class="stats-grid">
+            <!-- Course Progress Card -->
+            <div class="card">
+                <h3>Ongoing Course</h3>
+                <h2 style="margin: 10px 0;">Python for Data Science</h2>
+                <div class="progress-container">
+                    <div class="progress-bar"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; color: #5f6368;">
+                    <span>65% Completed</span>
+                    <span>12/18 Lessons</span>
+                </div>
+                <a href="lesson.html" class="btn-resume">Resume Lesson</a>
+            </div>
+
+            <!-- AI Points Card -->
+            <div class="card">
+                <h3>AI Tutor XP</h3>
+                <h2 style="font-size: 2.5rem; color: #1a73e8; margin: 10px 0;">1,450</h2>
+                <p style="color: #28a745; font-weight: bold;">↑ 12% increase from last week</p>
+                <p style="font-size: 0.9rem; color: #5f6368;">Great job on that Python Quiz!</p>
+            </div>
+        </div>
+
+        <!-- AI Recommendation -->
+        <div class="ai-tip">
+            <div style="font-size: 2rem;">💡</div>
+            <div>
+                <h4 style="margin: 0; color: #1a73e8;">AI Tutor's Recommendation</h4>
+                <p style="margin: 5px 0 0 0; color: #3c4043;">"Praveen, I noticed you're doing great with <b>Variables</b>, but we should spend more time on <b>Loops</b>. I've prepared a special practice set for you!"</p>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

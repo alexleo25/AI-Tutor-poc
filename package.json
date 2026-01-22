@@ -1,0 +1,14 @@
+{
+  "name": "ai-tutor-poc",
+  "version": "1.0.0",
+  "description": "AI Tutor POC - Monorepo",
+  "private": true,
+  "workspaces": [
+    "frontend/listings(moulali)/ai-tutor-app",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "cd frontend/listings(moulali)/ai-tutor-app && npm run dev",
+    "build": "cd frontend/listings(moulali)/ai-tutor-app && npm run build"
+  }
+}
