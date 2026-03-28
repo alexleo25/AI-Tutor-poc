@@ -78,5 +78,8 @@ Do not modify folders assigned to other team members.
 
 - Ready for parallel development by team members
 
+- Just the login and regisiter page is register
+
+- Tutor listing is in progress
 
 
